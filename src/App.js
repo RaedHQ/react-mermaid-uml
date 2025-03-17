@@ -1,23 +1,40 @@
-import logo from './logo.svg';
+import React from 'react';
+import MermaidDiagram from './components/MermaidDiagram';
 import './App.css';
 
 function App() {
+  const useCaseDiagram = `
+graph TD;
+  User["👤 User"] -->|Logs in| Login
+  User -->|Browses Items| BrowseItems
+  Admin["🛠️ Admin"] -->|Manages Users| ManageUsers
+  Admin -->|Generates Reports| GenerateReports
+`;
+
+
+
+  const classDiagram = `
+    %% Class Diagram
+    classDiagram
+      class User {
+        +String name
+        +String email
+        +login()
+        +logout()
+      }
+      class Admin {
+        +String adminId
+        +manageUsers()
+        +generateReports()
+      }
+      User <|-- Admin
+  `;
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Mermaid Diagrams</h1>
+      <MermaidDiagram chart={useCaseDiagram} />
+      <MermaidDiagram chart={classDiagram} />
     </div>
   );
 }
